@@ -21,6 +21,7 @@
         <elasticsearch.version>7.14.0</elasticsearch.version>
         <jsoup.version>1.10.2</jsoup.version>
         <feign.version>1.4.7.RELEASE</feign.version>
+        <logstash.version>6.6</logstash.version>
     </properties>
 
     <dependencies>
@@ -93,6 +94,13 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-openfeign</artifactId>
+            <version>3.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash.version}</version>
         </dependency>
     </dependencies>
 </project>
