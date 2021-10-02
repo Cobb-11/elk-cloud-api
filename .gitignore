@@ -1,0 +1,10 @@
+# Project exclude paths
+/elk-cloud-data/elk-cloud-data-feign/target/
+/elk-cloud-data/elk-cloud-data-rest/target/
+/elk-cloud-data/elk-cloud-data-service/target/
+/elk-cloud-es/elk-cloud-es-feign/target/
+/elk-cloud-es/elk-cloud-es-rest/target/
+/elk-cloud-es/elk-cloud-es-service/target/
+/elk-cloud-registration-center/target/
+/elk-cloud-ui/target/
+/elk-cloud-ui-parent/target/
