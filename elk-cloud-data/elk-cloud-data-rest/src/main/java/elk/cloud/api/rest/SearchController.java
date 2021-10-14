@@ -3,11 +3,17 @@ package elk.cloud.api.rest;
 import elk.cloud.api.bean.SearchBingResult;
 import elk.cloud.api.bean.SearchBingResut;
 import elk.cloud.api.dto.SearchBingRequest;
+import elk.cloud.api.dto.SearchDevLogDTO;
+import elk.cloud.api.dto.SearchDevLogRequest;
 import elk.cloud.api.service.SearchService;
 import elk.cloud.api.service.SearchToBingService;
+import elk.cloud.api.service.SearchToElasticSearchService;
 import elk.cloud.api.vo.SearchBingResponse;
+import elk.cloud.api.vo.SearchDevLogResponse;
+import elk.cloud.api.vo.SearchDevLogVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
@@ -20,8 +26,14 @@ public class SearchController implements SearchService {
 
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
-    @Autowired
-    private SearchToBingService searchToBingService;
+    private final SearchToBingService searchToBingService;
+
+    private final SearchToElasticSearchService searchToElasticSearchService;
+
+    public SearchController(SearchToBingService searchToBingService, SearchToElasticSearchService searchToElasticSearchService) {
+        this.searchToBingService = searchToBingService;
+        this.searchToElasticSearchService = searchToElasticSearchService;
+    }
 
     @Override
     public String getEsIndex(){
@@ -88,5 +100,22 @@ public class SearchController implements SearchService {
         return response;
     }
 
+    @Override
+    @ResponseBody
+    public List<SearchDevLogResponse> searchDevLog(@RequestBody SearchDevLogRequest request){
+        List<SearchDevLogResponse> responses = new ArrayList<>();
+        SearchDevLogDTO dto = new SearchDevLogDTO();
+        BeanUtils.copyProperties(request,dto);
+        List<SearchDevLogVO> voList = searchToElasticSearchService.searchDevLog(dto);
 
+        if(!CollectionUtils.isEmpty(voList)){
+            voList.forEach(searchDevLogVO -> {
+                SearchDevLogResponse response = new SearchDevLogResponse();
+                BeanUtils.copyProperties(searchDevLogVO,response);
+                responses.add(response);
+            });
+        }
+
+        return responses;
+    }
 }

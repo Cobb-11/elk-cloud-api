@@ -1,8 +1,10 @@
 package elk.cloud.api.rest;
 
+import elk.cloud.api.dto.SearchDTO;
 import elk.cloud.api.dto.WriteRequest;
 import elk.cloud.api.service.ElasticSearchOperationService;
 import elk.cloud.api.service.ElasticSearchService;
+import elk.cloud.api.vo.SearchVO;
 import elk.cloud.api.vo.WriteResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 @RestController
@@ -20,8 +23,11 @@ public class ElasticSearchOperationServiceImpl implements ElasticSearchOperation
 
 
 
-    @Autowired
-    private ElasticSearchService elasticSearchService;
+    private final ElasticSearchService elasticSearchService;
+
+    public ElasticSearchOperationServiceImpl(ElasticSearchService elasticSearchService) {
+        this.elasticSearchService = elasticSearchService;
+    }
 
 
     @Override
@@ -42,5 +48,14 @@ public class ElasticSearchOperationServiceImpl implements ElasticSearchOperation
         elasticSearchService.writeToEs(request.get_index(),resutList);
 
         return new WriteResponse();
+    }
+
+    @Override
+    @ResponseBody
+    public SearchVO search(@RequestBody SearchDTO dto){
+        SearchVO vo = new SearchVO();
+        List<Map<String, Object>> search = elasticSearchService.search(dto.getIndex(), dto.getQueryMap());
+        vo.setResultList(search);
+        return vo;
     }
 }
