@@ -1,6 +1,7 @@
 package elk.cloud.api.aspect;
 
-import com.alibaba.fastjson.JSONObject;
+import elk.cloud.api.utils.JsonWrapperMapper;
+import elk.cloud.api.utils.XmlWrapperMapper;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -48,13 +49,13 @@ public class InterfaceLogAspect {
             requestContent.setClassMethod(request.getMethod());
         }
 
-        requestContent.setArgs(JSONObject.toJSONString(joinPoint.getArgs()));
+        requestContent.setArgs( XmlWrapperMapper.toXml(joinPoint.getArgs()));
 
-        logger.info("接口{}入参：{}",requestContent.getClassMethod(),JSONObject.toJSONString(requestContent));
+        logger.info("接口{}入参：{}",requestContent.getClassMethod(),JsonWrapperMapper.toString(requestContent));
     }
 
     @AfterReturning(returning = "response",pointcut = "logPointCut()")
     public void doAfterReturning(Object response){
-        logger.info("接口返回：{}",JSONObject.toJSONString(response));
+        logger.info("接口返回：{}",XmlWrapperMapper.toXml(response));
     }
 }

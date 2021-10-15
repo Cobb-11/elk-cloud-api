@@ -1,9 +1,9 @@
 package elk.cloud.api.service;
 
-import com.alibaba.fastjson.JSON;
 import elk.cloud.api.bean.SearchBingResut;
 import elk.cloud.api.dto.WriteRequest;
 import elk.cloud.api.feignclient.EsOperationServiceClient;
+import elk.cloud.api.utils.JsonWrapperMapper;
 import elk.cloud.api.utils.SearchTypeEnum;
 import elk.cloud.api.utils.SearchUtil;
 import org.slf4j.Logger;
@@ -31,7 +31,7 @@ public class SearchToBingService {
 
         List<SearchBingResut> resutList = new SearchUtil().search(keyWord,type);
 
-        logger.info("搜索结果：{}",JSON.toJSONString(resutList));
+        logger.info("搜索结果：{}", JsonWrapperMapper.toString(resutList));
 
         try {
             WriteRequest request = new WriteRequest();
@@ -40,7 +40,7 @@ public class SearchToBingService {
             List<String> sources= new ArrayList<>();
             if(!CollectionUtils.isEmpty(resutList)){
                 resutList.forEach(searchBingResut -> {
-                    sources.add(JSON.toJSONString(searchBingResut));
+                    sources.add(JsonWrapperMapper.toString(searchBingResut));
                 });
             }
             request.set_source(sources);

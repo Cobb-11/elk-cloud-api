@@ -1,15 +1,14 @@
 package elk.cloud.api.service;
 
-import com.alibaba.fastjson.JSONObject;
 import elk.cloud.api.dto.SearchDTO;
 import elk.cloud.api.dto.SearchDevLogDTO;
 import elk.cloud.api.feignclient.EsOperationServiceClient;
+import elk.cloud.api.utils.JsonWrapperMapper;
 import elk.cloud.api.vo.SearchDevLogVO;
 import elk.cloud.api.vo.SearchVO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -46,10 +45,10 @@ public class SearchToElasticSearchService {
         Map<String,Object > queryMap = new HashMap<>();
         BeanUtils.copyProperties(dto,queryMap);
         searchDTO.setQueryMap(queryMap);
-        logger.info("查询开发日志入参：{}", JSONObject.toJSONString(dto));
+        logger.info("查询开发日志入参：{}", JsonWrapperMapper.toString(dto));
         SearchVO search = esOperationServiceClient.search(searchDTO);
 
-        logger.info("查询开发日志返回：{}",JSONObject.toJSONString(search));
+        logger.info("查询开发日志返回：{}", JsonWrapperMapper.toString(search));
 
         for (Map<String, Object> map : search.getResultList()) {
             SearchDevLogVO vo = new SearchDevLogVO();
