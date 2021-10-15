@@ -1,33 +1,24 @@
 package elk.cloud.api.service;
 
-import com.alibaba.fastjson.JSON;
-import com.alibaba.fastjson.JSONObject;
-import org.apache.http.HttpHost;
+import elk.cloud.api.utils.JsonWrapperMapper;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
-import org.elasticsearch.action.index.IndexResponse;
 import org.elasticsearch.action.search.SearchRequest;
 import org.elasticsearch.action.search.SearchResponse;
 import org.elasticsearch.client.RequestOptions;
-import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.elasticsearch.common.xcontent.XContentType;
-import org.elasticsearch.index.query.MatchQueryBuilder;
-import org.elasticsearch.index.query.QueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.elasticsearch.search.SearchHit;
 import org.elasticsearch.search.SearchHits;
 import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +35,7 @@ public class ElasticSearchService {
     }
 
     public void putData2Es(Object data) throws Exception {
-        String source=JSON.toJSONString(data);
+        String source= JsonWrapperMapper.toString(data);
         logger.info(source);
         List<IndexRequest> resutList = new ArrayList<>();
         IndexRequest request = new IndexRequest();
@@ -62,7 +53,7 @@ public class ElasticSearchService {
             IndexRequest indexRequest = new IndexRequest();
 
             indexRequest.index(index);
-            indexRequest.source(JSON.toJSONString(result), XContentType.JSON);
+            indexRequest.source(JsonWrapperMapper.toString(result), XContentType.JSON);
             request.add(result);
         });
 
@@ -71,10 +62,10 @@ public class ElasticSearchService {
         //RestHighLevelClient esRestClient = new RestHighLevelClient(RestClient.builder(new HttpHost("localhost", 9200, "http")));
         try {
 
-            logger.info("请求es，执行添加数据操作，入参：{}",JSON.toJSONString(request));
+            logger.info("请求es，执行添加数据操作，入参：{}",JsonWrapperMapper.toString(request));
 
             response = esRestClient.bulk(request, RequestOptions.DEFAULT);
-            logger.info("es响应结果:{}",JSON.toJSONString(response));
+            logger.info("es响应结果:{}",JsonWrapperMapper.toString(response));
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
@@ -101,9 +92,9 @@ public class ElasticSearchService {
         }
         request.source(builder);
         try {
-            logger.info("查询elasticsearch入参：{}", JSONObject.toJSONString(queryMap));
+            logger.info("查询elasticsearch入参：{}", JsonWrapperMapper.toString(queryMap));
             response = esRestClient.search(request,RequestOptions.DEFAULT);
-            logger.info("查询elasticsearch返回：{}",JSONObject.toJSONString(response));
+            logger.info("查询elasticsearch返回：{}",JsonWrapperMapper.toString(response));
         } catch (IOException e) {
             logger.error(e.getMessage());
         }
