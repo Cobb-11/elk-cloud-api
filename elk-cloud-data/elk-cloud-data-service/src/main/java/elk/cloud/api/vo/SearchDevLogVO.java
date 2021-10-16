@@ -6,11 +6,11 @@ public class SearchDevLogVO {
 
     private String className;
 
-    private String logLevel;
+    private String level;
 
     private String message;
 
-    private String timeStamp;
+    private String timestamp;
 
     private String host;
 
@@ -32,12 +32,12 @@ public class SearchDevLogVO {
         this.className = className;
     }
 
-    public String getLogLevel() {
-        return logLevel;
+    public String getLevel() {
+        return level;
     }
 
-    public void setLogLevel(String logLevel) {
-        this.logLevel = logLevel;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getMessage() {
@@ -48,12 +48,12 @@ public class SearchDevLogVO {
         this.message = message;
     }
 
-    public String getTimeStamp() {
-        return timeStamp;
+    public String getTimestamp() {
+        return timestamp;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        this.timeStamp = timeStamp;
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getHost() {

@@ -12,7 +12,7 @@ public class SearchDevLogRequest {
 
     private String className;
 
-    private String logLevel;
+    private String level;
 
     private String message;
 
@@ -56,12 +56,12 @@ public class SearchDevLogRequest {
         this.className = className;
     }
 
-    public String getLogLevel() {
-        return logLevel;
+    public String getLevel() {
+        return level;
     }
 
-    public void setLogLevel(String logLevel) {
-        this.logLevel = logLevel;
+    public void setLevel(String level) {
+        this.level = level;
     }
 
     public String getMessage() {
