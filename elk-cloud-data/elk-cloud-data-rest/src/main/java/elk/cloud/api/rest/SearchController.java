@@ -57,7 +57,6 @@ public class SearchController implements SearchService {
     }
 
     @Override
-    @ResponseBody
     public SearchBingResponse searchBing(@RequestBody SearchBingRequest request){
         SearchBingResponse response = new SearchBingResponse();
         long startTime = System.currentTimeMillis();
@@ -101,7 +100,6 @@ public class SearchController implements SearchService {
     }
 
     @Override
-    @ResponseBody
     public List<SearchDevLogResponse> searchDevLog(@RequestBody SearchDevLogRequest request){
         List<SearchDevLogResponse> responses = new ArrayList<>();
         SearchDevLogDTO dto = new SearchDevLogDTO();

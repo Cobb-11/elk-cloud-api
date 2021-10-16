@@ -31,7 +31,6 @@ public class ElasticSearchOperationServiceImpl implements ElasticSearchOperation
 
 
     @Override
-    @ResponseBody
     public WriteResponse wrtie(@RequestBody WriteRequest request) throws Exception {
         if (Objects.isNull(request) || CollectionUtils.isEmpty(request.get_source())){
             throw new Exception("入参为空！");
@@ -51,7 +50,6 @@ public class ElasticSearchOperationServiceImpl implements ElasticSearchOperation
     }
 
     @Override
-    @ResponseBody
     public SearchVO search(@RequestBody SearchDTO dto){
         SearchVO vo = new SearchVO();
         List<Map<String, Object>> search = elasticSearchService.search(dto.getIndex(), dto.getQueryMap());

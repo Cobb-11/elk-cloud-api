@@ -6,6 +6,7 @@
 
     <script src="/components/jquery-3.6.0.min.js"></script>
     <script src="/js/devLog.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/devLog.css">
 </head>
 <body>
 
@@ -13,14 +14,31 @@
     <span>统计时间始：</span><input class="" id="dateStart">
     <span>统计时间止：</span><input class="" id="dateEnd">
     <span>应用名：</span><input class="" id="appName">
+    <span>请求跟踪号：</span><input class="" id="traceId">
 </div>
 <div class="search-input">
-    <span>请求跟踪号：</span><input class="" id="traceId">
     <span>类名：</span><input class="" id="className">
-    <span>日志级别：</span><select class="" id="logLevel"><option>----------</option><option>debug</option><option>info</option><option>warn</option><option>error</option></select>
+    <span>日志级别：</span><select class="" id="logLevel"><option>----------</option><option>DEBUG</option><option>INFO</option><option>WARN</option><option>ERROR</option></select>
     <span>日志摘要：</span><input class="" id="message">
+    <button class="to-search">搜索</button>
 </div>
 
-<button class="to-search">搜索</button>
+
+
+<table class="resultTab">
+    <thead>
+    <tr>
+        <th>应用名</th>
+        <th>类名</th>
+        <th>主机ip</th>
+        <th>端口</th>
+        <th>日志级别</th>
+        <th>日志摘要</th>
+        <th>记录时间</th>
+    </tr>
+    </thead>
+    <tbody class="search-result">
+    </tbody>
+</table>
 </body>
 </html>

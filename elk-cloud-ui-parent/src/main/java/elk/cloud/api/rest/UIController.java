@@ -25,13 +25,11 @@ public class UIController {
     }
 
     @PostMapping("/search")
-    @ResponseBody
     public SearchBingResponse search(@RequestBody SearchBingRequest request){
         return client.searchBing(request);
     }
 
     @PostMapping("/searchDevLog")
-    @ResponseBody
     public List<SearchDevLogResponse> searchDevLog(@RequestBody SearchDevLogRequest request){
         return client.searchDevLog(request);
     }

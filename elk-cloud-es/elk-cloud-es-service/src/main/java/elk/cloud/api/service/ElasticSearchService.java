@@ -1,6 +1,7 @@
 package elk.cloud.api.service;
 
 import elk.cloud.api.utils.JsonWrapperMapper;
+import elk.cloud.api.utils.XmlWrapperMapper;
 import org.elasticsearch.action.bulk.BulkRequest;
 import org.elasticsearch.action.bulk.BulkResponse;
 import org.elasticsearch.action.index.IndexRequest;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 
 @Service
@@ -87,16 +89,23 @@ public class ElasticSearchService {
         request.indices(index);
 
         SearchSourceBuilder builder = new SearchSourceBuilder();
-        for (String key : queryMap.keySet()) {
-            builder.query(QueryBuilders.matchQuery(key,queryMap.get(key)));
+        if(Objects.nonNull(queryMap)){
+            queryMap.keySet().forEach(key->{
+                if(Objects.nonNull(queryMap.get(key))){
+                    builder.query(QueryBuilders.matchQuery(key,queryMap.get(key)));
+                }
+            });
         }
         request.source(builder);
         try {
             logger.info("查询elasticsearch入参：{}", JsonWrapperMapper.toString(queryMap));
             response = esRestClient.search(request,RequestOptions.DEFAULT);
-            logger.info("查询elasticsearch返回：{}",JsonWrapperMapper.toString(response));
+            logger.info("查询elasticsearch返回：{}", XmlWrapperMapper.toXml(response));
         } catch (IOException e) {
             logger.error(e.getMessage());
+        }
+        if(Objects.isNull(response)){
+            return resultList;
         }
         SearchHits hits = response.getHits();
         SearchHit[] searchHits = hits.getHits();

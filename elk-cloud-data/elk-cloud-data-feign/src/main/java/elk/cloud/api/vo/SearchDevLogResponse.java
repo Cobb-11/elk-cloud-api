@@ -6,11 +6,11 @@ public class SearchDevLogResponse {
 
     private String className;
 
-    private String logLevel;
+    private String level;
 
     private String message;
 
-    private String TimeStamp;
+    private String timestamp;
 
     private String host;
 
@@ -32,14 +32,6 @@ public class SearchDevLogResponse {
         this.className = className;
     }
 
-    public String getLogLevel() {
-        return logLevel;
-    }
-
-    public void setLogLevel(String logLevel) {
-        this.logLevel = logLevel;
-    }
-
     public String getMessage() {
         return message;
     }
@@ -48,12 +40,20 @@ public class SearchDevLogResponse {
         this.message = message;
     }
 
-    public String getTimeStamp() {
-        return TimeStamp;
+    public String getLevel() {
+        return level;
     }
 
-    public void setTimeStamp(String timeStamp) {
-        TimeStamp = timeStamp;
+    public void setLevel(String level) {
+        this.level = level;
+    }
+
+    public String getTimestamp() {
+        return timestamp;
+    }
+
+    public void setTimestamp(String timestamp) {
+        this.timestamp = timestamp;
     }
 
     public String getHost() {

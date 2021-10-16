@@ -1,0 +1,29 @@
+.search-input{
+    width: 100%;
+    text-align: center;
+    line-height: 50px;
+}
+
+span{
+    margin-left: 20px;
+}
+
+
+
+button{
+    width: 100px;
+    background-color: dimgray;
+}
+
+table,thead,tbody,tr,th,td{
+    border: black 1px solid;
+}
+
+.resultTab, .resultTab thead{
+    border: black 1px;
+    width: 100%;
+}
+
+td{
+    text-align: center;
+}
