@@ -15,13 +15,28 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
 
+    <!-- 在properties下声明相应的版本信息，然后在dependency下引用的时候用${spring-version}就可以引入该版本jar包了 -->
     <properties>
-        <java.version>1.8</java.version>
         <spring-cloud.version>2020.0.0</spring-cloud.version>
         <elasticsearch.version>7.14.0</elasticsearch.version>
         <jsoup.version>1.10.2</jsoup.version>
         <feign.version>1.4.7.RELEASE</feign.version>
         <logstash.version>6.6</logstash.version>
+
+        <!-- 编码 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- jdk -->
+        <java.version>1.8</java.version>
+
+        <fastjson.version>1.2.78</fastjson.version>
+
+        <!-- springboot -->
+        <platform-bom.version>2.4.3</platform-bom.version>
+
+        <!-- commons 组件 -->
+        <commons-pool2.version>2.6.0</commons-pool2.version>
+
+        <elastic-job.version>2.1.5</elastic-job.version>
     </properties>
 
     <dependencies>
@@ -113,5 +128,29 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+            <version>${fastjson.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-pool2</artifactId>
+            <version>${commons-pool2.version}</version>
+        </dependency>
+
+        <!--    <dependency>
+                <groupId>com.github.kuhn-he</groupId>
+                <artifactId>elastic-job-lite-spring-boot-starter</artifactId>
+                <version>${elastic-job.version}</version>
+            </dependency>-->
+
     </dependencies>
 </project>

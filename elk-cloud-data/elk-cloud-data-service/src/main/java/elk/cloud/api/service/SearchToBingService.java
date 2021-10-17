@@ -1,6 +1,7 @@
 package elk.cloud.api.service;
 
 import elk.cloud.api.bean.SearchBingResut;
+import elk.cloud.api.cache.redis.manage.RedisManage;
 import elk.cloud.api.dto.WriteRequest;
 import elk.cloud.api.feignclient.EsOperationServiceClient;
 import elk.cloud.api.utils.JsonWrapperMapper;
@@ -25,6 +26,9 @@ public class SearchToBingService {
     @Autowired
     private EsOperationServiceClient esOperationServiceClient;
 
+    @Autowired
+    private RedisManage redisManage;
+
 
     public  List<SearchBingResut> searchBing(String keyWord,String type) throws IOException {
         logger.info("搜索引擎：{}，搜索关键字：{}", SearchTypeEnum.getSearchTypeByEngin(type).getName(),keyWord);
@@ -32,6 +36,10 @@ public class SearchToBingService {
         List<SearchBingResut> resutList = new SearchUtil().search(keyWord,type);
 
         logger.info("搜索结果：{}", JsonWrapperMapper.toString(resutList));
+
+        redisManage.set("searchBing_"+keyWord,resutList,3600);
+
+        logger.info("redis:{}",redisManage.get("searchBing_"+keyWord));
 
         try {
             WriteRequest request = new WriteRequest();
