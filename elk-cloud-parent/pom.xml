@@ -37,6 +37,8 @@
         <commons-pool2.version>2.6.0</commons-pool2.version>
 
         <elastic-job.version>2.1.5</elastic-job.version>
+
+        <mybatis-plus.version>3.4.2</mybatis-plus.version>
     </properties>
 
     <dependencies>
@@ -151,6 +153,12 @@
                 <artifactId>elastic-job-lite-spring-boot-starter</artifactId>
                 <version>${elastic-job.version}</version>
             </dependency>-->
+
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-boot-starter</artifactId>
+            <version>${mybatis-plus.version}</version>
+        </dependency>
 
     </dependencies>
 </project>
