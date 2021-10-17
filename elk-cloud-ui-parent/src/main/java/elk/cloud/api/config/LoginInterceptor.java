@@ -50,6 +50,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 
         uris.add("/swagger-ui.html");
 
+        uris.add("/components/*");
         uris.add("/js/*");
         uris.add("/css/*");
         return uris;
