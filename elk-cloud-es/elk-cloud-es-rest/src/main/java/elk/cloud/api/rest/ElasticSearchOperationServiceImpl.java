@@ -9,6 +9,7 @@ import elk.cloud.api.vo.WriteResponse;
 import org.elasticsearch.action.index.IndexRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -55,5 +56,10 @@ public class ElasticSearchOperationServiceImpl implements ElasticSearchOperation
         List<Map<String, Object>> search = elasticSearchService.search(dto.getIndex(), dto.getQueryMap());
         vo.setResultList(search);
         return vo;
+    }
+
+    @GetMapping(value = "/gateway")
+    public String search(){
+        return "gateWay";
     }
 }

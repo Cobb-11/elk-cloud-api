@@ -7,9 +7,10 @@ import elk.cloud.api.feignclient.EsOperationServiceClient;
 import elk.cloud.api.utils.JsonWrapperMapper;
 import elk.cloud.api.utils.SearchTypeEnum;
 import elk.cloud.api.utils.SearchUtil;
+import elk.cloud.api.messagequeue.rabbitmq.config.RabbitMqConfig;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
 
@@ -23,11 +24,17 @@ public class SearchToBingService {
     private final Logger logger= LoggerFactory.getLogger(this.getClass());
 
 
-    @Autowired
-    private EsOperationServiceClient esOperationServiceClient;
+    private final EsOperationServiceClient esOperationServiceClient;
 
-    @Autowired
-    private RedisManage redisManage;
+    private final RedisManage redisManage;
+
+    private final RabbitTemplate rabbitTemplate;
+
+    public SearchToBingService(EsOperationServiceClient esOperationServiceClient, RedisManage redisManage, RabbitTemplate rabbitTemplate) {
+        this.esOperationServiceClient = esOperationServiceClient;
+        this.redisManage = redisManage;
+        this.rabbitTemplate = rabbitTemplate;
+    }
 
 
     public  List<SearchBingResut> searchBing(String keyWord,String type) throws IOException {
@@ -42,6 +49,8 @@ public class SearchToBingService {
         logger.info("redis:{}",redisManage.get("searchBing_"+keyWord));
 
         try {
+            rabbitTemplate.convertAndSend(RabbitMqConfig.EXCHANGE_TOPICS_INFORM,"inform.email", keyWord+"-"+type);
+
             WriteRequest request = new WriteRequest();
             request.set_index(type);
             request.set_id(keyWord);

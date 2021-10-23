@@ -18,7 +18,7 @@ function search(){
 
     $.ajax({
         type:"post",
-        url:"/searchDevLog",
+        url:"/basedata/searchDevLog",
         contentType:"application/json",
         data:JSON.stringify({"dateStart":dateStart,"dateEnd":dateEnd,"level":level,"message":message}),
         dataType:"json",

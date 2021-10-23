@@ -5,41 +5,38 @@
     <title>login</title>
     <script type="text/javascript" src="/components/jquery-3.6.0.min.js"></script>
     <script type="text/javascript" src="/js/login.js"></script>
+    <link rel="canonical" href="https://v5.bootcss.com/docs/examples/sign-in/">
+    <!-- Bootstrap core CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LY6QZQpYtqgQLJeUeh2disXkUUa+fRYfq/3dxdpkU5PQZUCqg/BK4wrhQ9idOojx" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="/css/login.css">
-</head>
-<body>
-<div class="main">
+    <!-- Favicons -->
+    <meta name="theme-color" content="#7952b3">
 
-    <div class="login-form">
-        <h2>SignIn Form</h2>
-        <div class="agileits-top">
-            <form action="#" method="post">
-                <div class="styled-input">
-                    <input type="text" name="User Name" required=""/>
-                    <label>User Name</label>
-                    <span></span>
-                </div>
-                <div class="styled-input">
-                    <input type="password" name="Password" required="">
-                    <label>Password</label>
-                    <span></span>
-                </div>
-                <div class="wthree-text">
-                    <ul>
-                        <li>
-                            <input type="checkbox" id="brand" value="">
-                            <label for="brand"><span></span> Remember me ?</label>
-                        </li>
-                        <li> <a href="#">Forgot password?</a> </li>
-                    </ul>
-                    <div class="clear"> </div>
-                </div>
-            </form>
+</head>
+<body class="text-center">
+<main class="form-signin">
+    <form>
+        <img class="mb-4" src="/img/bootstrap-logo.svg" alt="" width="72" height="57">
+        <h1 class="h3 mb-3 fw-normal">Please sign in</h1>
+
+        <div class="form-floating">
+           <!-- <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">-->
+            <input class="form-control" id="floatingInput" placeholder="UserName">
+            <label for="floatingInput">UserName</label>
         </div>
-        <div class="agileits-bottom">
-            <input type="submit" class="toLogin" value="Sign In">
+        <div class="form-floating">
+            <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+            <label for="floatingPassword">Password</label>
         </div>
-    </div>
-</div>
+
+        <div class="checkbox mb-3">
+            <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label>
+        </div>
+        <button class="w-100 btn btn-lg btn-primary toLogin" type="submit">Sign in</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2017–2021</p>
+    </form>
+</main>
 </body>
 </html>

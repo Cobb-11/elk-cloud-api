@@ -1,3 +1,4 @@
+/*
 package elk.cloud.api.config;
 
 import org.slf4j.Logger;
@@ -10,17 +11,21 @@ import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
+*/
 /**
  * 登录拦截器
  *
  * @since 2021年10月17日18:07:54
  * @author Cobb
- */
+ *//*
+
 public class LoginInterceptor implements HandlerInterceptor {
 
-    /**
+    */
+/**
      * 用于存储排除拦截的url  （登录/login.html, /css,/js,/img）
-     */
+     *//*
+
     private List<String> uris  = new ArrayList<>();
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -53,6 +58,7 @@ public class LoginInterceptor implements HandlerInterceptor {
         uris.add("/components/*");
         uris.add("/js/*");
         uris.add("/css/*");
+        uris.add("/img/*");
         return uris;
     }
 
@@ -60,3 +66,4 @@ public class LoginInterceptor implements HandlerInterceptor {
         this.uris = uris;
     }
 }
+*/

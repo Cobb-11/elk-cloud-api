@@ -1,16 +1,19 @@
+/*
 package elk.cloud.api.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
+*/
 /**
  * 注册拦截器配置类
  *
  * @author Cobb
  *
  * @since 2021年10月17日18:19:35
- */
+ *//*
+
 @Configuration
 public class LoginWebappAdapter implements WebMvcConfigurer {
 
@@ -24,3 +27,4 @@ public class LoginWebappAdapter implements WebMvcConfigurer {
         WebMvcConfigurer.super.addInterceptors(registry);
     }
 }
+*/
